@@ -1,5 +1,9 @@
-#textme {
-height: auto;
+button {
+    padding: 5px 20px;
+    border-radius: 5px;
+    border: solid 1px black;
+    color: white;
+    background-color: green;
 }
 
 .tekstboks {

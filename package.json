@@ -1,0 +1,25 @@
+{
+  "name": "ama-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --watch server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "module",
+    "url": "git+https://github.com/AndyAndyVu/ama-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AndyAndyVu/ama-bot/issues"
+  },
+  "homepage": "https://github.com/AndyAndyVu/ama-bot#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
