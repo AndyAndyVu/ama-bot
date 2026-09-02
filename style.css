@@ -1,0 +1,10 @@
+#textme {
+height: auto;
+}
+
+.tekstboks {
+    border: solid 1px black;
+    width: 300px;
+    height: 200px;
+    margin-top: 1rem;
+}

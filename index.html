@@ -1,5 +1,30 @@
-<html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
   <body>
-    <h1>Hello</h1>
+    <main>
+      <section>
+        <article>
+          <h1>Lidt om mig</h1>
+          <form>
+            <input
+              type="text"
+              id="textme"
+              name="textme"
+              placeholder="Skriv en besked til mig"
+              required
+            />
+            <button type="submit">Spørg</button>
+          </form>
+
+          <div class="tekstboks">${response}</div>
+        </article>
+      </section>
+    </main>
   </body>
 </html>
