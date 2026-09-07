@@ -12,16 +12,22 @@
       <section>
         <article class="answers">
           <h1>🙈 Chatbot about me 🙈</h1>
-          <form>
+          <form method="POST" action="/ask">
             <textarea
               type="text"
-              id="textme"
-              name="textme"
+              id="question"
+              name="question"
               placeholder="Skriv en besked til mig"
               required
             ></textarea>
             <button type="submit">Ask</button>
           </form>
+
+          <% if (question) { %>
+  <article class="question">
+    <p><%= question %></p>
+  </article>
+<% } %>
           <h2>Display the questions...</h2>
           <div class="tekstboks"></div>
         </article>
