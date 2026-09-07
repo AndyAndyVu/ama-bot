@@ -1,12 +1,10 @@
 import express from "express";
 
-const server = express();
-const port = 3333;
+const app = express();
+const port = 3000;
 
-server.get("/", (request, response) => {
-  response.send("Hello Express.js 🎉");
-});
+app.use(express.static("public"));
 
-server.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
 });
