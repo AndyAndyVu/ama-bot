@@ -23,9 +23,9 @@
             <button type="submit">Ask</button>
           </form>
 
-          <% if (question) { %>
-  <article class="question">
-    <p><%= question %></p>
+<% for (const message of messages) { %>
+  <article class="<%= message.type %>">
+    <p><%= message.text %></p>
   </article>
 <% } %>
           <h2>Display the questions...</h2>
