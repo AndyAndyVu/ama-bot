@@ -25,3 +25,11 @@ button {
     width: auto;
     margin-top: 1rem;
 }
+
+.question {
+    background-color: aqua;
+}
+
+.answer {
+    background: red;
+}
