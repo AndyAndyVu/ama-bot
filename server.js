@@ -39,18 +39,23 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 app.get("/", (request, response) => {
-  response.render("index", { messages });
+  response.render("index", { messages, error: "" });
 });
 
 app.post("/ask", (request, response) => {
-  const question = request.body.question;
+  const question = request.body.question.trim();
+  let error = "";
 
-messages.push({ type: "question", text: question });
-const answer = findAnswer(question);
-messages.push({ type: "answer", text: answer });
-  response.render("index", { messages });
+  if (!question) {
+    error = "Skriv et spørgsmål, før du sender.";
+  } else {
+    messages.push({ type: "question", text: question });
+    const answer = findAnswer(question);
+    messages.push({ type: "answer", text: answer });
+  }
+
+  response.render("index", { messages, error });
 });
-
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });

@@ -28,6 +28,10 @@
     <p><%= message.text %></p>
   </article>
 <% } %>
+
+<% if (error) { %>
+  <p role="alert"><%= error %></p>
+<% } %>
           <h2>Display the questions...</h2>
           <div class="tekstboks"></div>
         </article>
