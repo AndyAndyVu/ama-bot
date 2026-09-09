@@ -19,6 +19,30 @@ const answers = [
   }
 ];
 
+function countMatches(keywords, normalizedQuestion) {
+  const matches = keywords.filter((keyword) =>
+    normalizedQuestion.includes(keyword)
+  );
+
+  return matches.length;
+}
+
+function findBestAnswer(question) {
+  const normalizedQuestion = question.toLowerCase();
+  let bestScore = 0;
+  let bestAnswer = "Det kender jeg ikke svaret på endnu.";
+
+  for (const answerGroup of answers) {
+    bestScore = [""]
+    // 1. Beregn denne regels score.
+    // 2. Sammenlign med bestScore.
+    // 3. Gem score og svar, hvis reglen er bedre.
+  }
+
+  return bestAnswer;
+}
+
+
 function findAnswer(question) {
   const normalizedQuestion = question.toLowerCase();
 
