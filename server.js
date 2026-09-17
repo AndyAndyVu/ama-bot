@@ -12,15 +12,13 @@ const topicStats = {
 async function loadMessages() {
   const data = await fs.readFile("./data/messages.json", "utf8");
   return JSON.parse(data)
-  // TODO: Læs data/messages.json med fs.readFile() ("utf8").
-  // TODO: Parse JSON-teksten til et array, og returnér det.
+
 }
 
 async function saveMessages(messages) {
   const json = JSON.stringify(messages, null, 2);
   await fs.writeFile("./data/messages.json", json)
-  // TODO: Omdan messages til formateret JSON-tekst med JSON.stringify().
-  // TODO: Skriv teksten til data/messages.json med fs.writeFile().
+
 }
 
 const answers = [
