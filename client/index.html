@@ -23,23 +23,21 @@
             <button type="submit">Ask</button>
           </form>
 
-<% for (const message of messages) { %>
-  
-  <article class="tekstboks <%= message.type %>">
-    <p><%= message.text %></p>
-  </article>
-<% } %>
+          <% for (const message of messages) { %>
 
-<% if (error) { %>
-  <p role="alert"><%= error %></p>
-<% } %>
+          <article class="tekstboks <%= message.type %>">
+            <p><%= message.text %></p>
+          </article>
+          <% } %> <% if (error) { %>
+          <p role="alert"><%= error %></p>
+          <% } %>
 
-<h2>Spørgsmål fordelt på emner</h2>
-<ul>
-  <li>Navn: <%= topicStats.navn %></li>
-  <li>By: <%= topicStats.by %></li>
-  <li>Hobby: <%= topicStats.hobby %></li>
-</ul>
+          <h2>Spørgsmål fordelt på emner</h2>
+          <ul>
+            <li>Navn: <%= topicStats.navn %></li>
+            <li>By: <%= topicStats.by %></li>
+            <li>Hobby: <%= topicStats.hobby %></li>
+          </ul>
         </article>
       </section>
     </main>

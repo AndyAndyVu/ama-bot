@@ -12,6 +12,7 @@ const topicStats = {
 async function loadMessages() {
   const data = await fs.readFile("./data/messages.json", "utf8");
   return JSON.parse(data)
+
 }
 
 async function saveMessages(messages) {
@@ -85,19 +86,23 @@ function findAnswer(question) {
 
   return "Det kender jeg ikke svaret på endnu.";
 }
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.json());
+app.use(express.static("public"));
 
+app.set("view engine", "ejs");
 
-app.get("/messages", async (request, response) => {
+app.get("/", async (request, response) => {
   const messages = await loadMessages();
 
-  response.json(messages);
+  response.render("index", { messages, error: "", topicStats });
 });
 
 app.post("/ask", async (request, response) => {
   const messages = await loadMessages();
-  const question = request.body.question;
+
+  const question = request.body.question.trim();
+  let error = "";
 
   if (!question) {
     error = "Skriv et spørgsmål, før du sender.";
@@ -114,6 +119,7 @@ app.post("/ask", async (request, response) => {
 
   await saveMessages(messages);
 
+  response.render("index", { messages, error, topicStats });
 });
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
