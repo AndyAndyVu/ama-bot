@@ -1,4 +1,5 @@
 import express from "express";
+import fs from "node:fs/promises";
 
 const app = express();
 const port = 3333;
@@ -8,6 +9,21 @@ const topicStats = {
   by: 0,
   hobby: 0
 };
+
+async function loadMessages() {
+  const data = await fs.readFile("./data/messages.json", "utf8");
+  return JSON.parse(data)
+  // TODO: Læs data/messages.json med fs.readFile() ("utf8").
+  // TODO: Parse JSON-teksten til et array, og returnér det.
+}
+
+async function saveMessages(messages) {
+  const json = JSON.stringify(messages, null, 2);
+  await fs.writeFile("./data/messages.json", json)
+  // TODO: Omdan messages til formateret JSON-tekst med JSON.stringify().
+  // TODO: Skriv teksten til data/messages.json med fs.writeFile().
+}
+
 const answers = [
   {
     category: "navn",
@@ -79,11 +95,15 @@ app.use(express.static("public"));
 
 app.set("view engine", "ejs");
 
-app.get("/", (request, response) => {
+app.get("/", async (request, response) => {
+  const messages = await loadMessages();
+
   response.render("index", { messages, error: "", topicStats });
 });
 
-app.post("/ask", (request, response) => {
+app.post("/ask", async (request, response) => {
+  const messages = await loadMessages();
+
   const question = request.body.question.trim();
   let error = "";
 
@@ -91,14 +111,16 @@ app.post("/ask", (request, response) => {
     error = "Skriv et spørgsmål, før du sender.";
   } else {
     messages.push({ type: "question", text: question });
+
     const result = findBestAnswer(question);
     messages.push({ type: "answer", text: result.answer });
-    if (result.category) {
-    topicStats[result.category] = topicStats[result.category] + 1;
-}
-  }
-  console.log(topicStats);
 
+    if (result.category) {
+      topicStats[result.category] = topicStats[result.category] + 1;
+    }
+  }
+
+  await saveMessages(messages);
 
   response.render("index", { messages, error, topicStats });
 });
