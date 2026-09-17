@@ -3,7 +3,6 @@ import fs from "node:fs/promises";
 
 const app = express();
 const port = 3333;
-const messages = [];
 const topicStats = {
   navn: 0,
   by: 0,
