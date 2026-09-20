@@ -2,7 +2,7 @@ import express from "express";
 import fs from "node:fs/promises";
 
 const app = express();
-const port = 3333;
+const port = 3000;
 const topicStats = {
   navn: 0,
   by: 0,
@@ -12,7 +12,6 @@ const topicStats = {
 async function loadMessages() {
   const data = await fs.readFile("./data/messages.json", "utf8");
   return JSON.parse(data)
-
 }
 
 async function saveMessages(messages) {
@@ -86,23 +85,19 @@ function findAnswer(question) {
 
   return "Det kender jeg ikke svaret på endnu.";
 }
-app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static("public"));
+app.use(express.json());
 
-app.set("view engine", "ejs");
 
-app.get("/", async (request, response) => {
+app.get("/messages", async (request, response) => {
   const messages = await loadMessages();
 
-  response.render("index", { messages, error: "", topicStats });
+  response.json(messages);
 });
 
 app.post("/ask", async (request, response) => {
   const messages = await loadMessages();
-
-  const question = request.body.question.trim();
-  let error = "";
+  const question = request.body.question;
 
   if (!question) {
     error = "Skriv et spørgsmål, før du sender.";
@@ -119,7 +114,6 @@ app.post("/ask", async (request, response) => {
 
   await saveMessages(messages);
 
-  response.render("index", { messages, error, topicStats });
 });
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

@@ -2,7 +2,7 @@ import express from "express";
 import fs from "node:fs/promises";
 
 const app = express();
-const port = 3333;
+const port = 3000;
 const topicStats = {
   navn: 0,
   by: 0,
