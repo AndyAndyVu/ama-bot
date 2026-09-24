@@ -1,42 +1,27 @@
 [
   {
     "type": "question",
-    "text": "virker det her hobby"
+    "text": "hvad hedder du",
+    "createdAt": "2026-09-24T14:21:56.851Z"
   },
   {
     "type": "answer",
-    "text": "Jeg bor i Aarhus."
+    "text": "Jeg hedder Ada.",
+    "createdAt": "2026-09-24T14:21:56.852Z"
   },
   {
     "type": "question",
-    "text": "virker det her hobby"
+    "text": "hvad din hobby",
+    "createdAt": "2026-09-24T14:22:02.990Z"
   },
   {
     "type": "answer",
-    "text": "Jeg bor i Aarhus."
+    "text": "Jeg bor i Aarhus.",
+    "createdAt": "2026-09-24T14:22:02.990Z"
   },
   {
     "type": "question",
-    "text": "virker det her hobby"
-  },
-  {
-    "type": "answer",
-    "text": "Jeg bor i Aarhus."
-  },
-  {
-    "type": "question",
-    "text": "hobby"
-  },
-  {
-    "type": "answer",
-    "text": "Jeg bor i Aarhus."
-  },
-  {
-    "type": "question",
-    "text": "hvad mimn hobby"
-  },
-  {
-    "type": "answer",
-    "text": "Jeg bor i Aarhus."
+    "text": "hvorfor virker du ikk",
+    "createdAt": "2026-09-24T17:42:21.674Z"
   }
 ]

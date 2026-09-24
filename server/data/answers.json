@@ -1,0 +1,45 @@
+[
+  {
+    "category": "navn",
+    "keywords": [
+      "navn",
+      "hedder",
+      "hvem er du"
+    ],
+    "answer": "Jeg hedder Ada."
+  },
+  {
+    "category": "by",
+    "keywords": [
+      "bor",
+      "by",
+      "fra"
+    ],
+    "answer": "Jeg bor i Aarhus."
+  },
+  {
+    "category": "hobby",
+    "keywords": [
+      "fritid",
+      "hobby",
+      "kan lide"
+    ],
+    "answer": "I min fritid kan jeg godt lide at spille eller slappe af."
+  },
+  {
+    "category": "mad"
+  },
+  {},
+  {},
+  {},
+  {},
+  {
+    "category": "ikkeMad"
+  },
+  {
+    "category": "ikkeMadddd"
+  },
+  {
+    "category": "ikkeMadddd"
+  }
+]
