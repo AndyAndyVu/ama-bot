@@ -147,6 +147,26 @@ app.post("/answers", async (request, response) => {
   response.json(newAnswerRule);
 });
 
+app.put("/answers/:category", async (request, response) => {
+  const answers = await loadAnswers();
+  const answerRule = answers.find((a) => a.category === request.params.category);
+
+  answerRule.keywords = request.body.keywords;
+  answerRule.answer = request.body.answer;
+  await saveAnswers(answers);
+
+  response.json(answerRule);
+});
+
+app.delete("/answers/:category", async (request, response) => {
+  const answers = await loadAnswers();
+  const updatedAnswers = answers.filter((a) => a.category !== request.params.category);
+
+  await saveAnswers(updatedAnswers);
+
+  response.send();
+});
+
 
 
 app.listen(port, () => {
