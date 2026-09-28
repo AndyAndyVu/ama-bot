@@ -99,6 +99,8 @@ app.post("/ask", async (request, response) => {
   const messages = await loadMessages();
   const question = request.body.question;
 
+  // error besked
+
   if (!question) {
     error = "Skriv et spørgsmål, før du sender.";
   } else {
@@ -113,6 +115,8 @@ app.post("/ask", async (request, response) => {
   }
 
   await saveMessages(messages);
+
+  // response status 201
 
 });
 app.listen(port, () => {
