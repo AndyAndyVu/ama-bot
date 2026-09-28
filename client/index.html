@@ -1,42 +1,43 @@
 <!doctype html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/assets/styles/style.css" />
-    <img src="/assets/images/random.jpg" alt="Billede af random" />
-    <title>Document</title>
+    <script src="app.js" defer></script>
+    <title>Chatbot about me</title>
   </head>
+
   <body>
     <main>
       <section>
         <article class="answers">
+          <img src="/assets/images/random.jpg" alt="Billede af random" />
+
           <h1>🙈 Chatbot about me 🙈</h1>
-          <form method="POST" action="/ask">
+
+          <form id="question-form" method="POST" action="/ask">
             <textarea
-              type="text"
               id="question"
               name="question"
               placeholder="Skriv en besked til mig"
               required
             ></textarea>
+
             <button type="submit">Ask</button>
           </form>
 
-          <% for (const message of messages) { %>
+          <button type="button" id="clear-messages-button">Ryd beskeder</button>
 
-          <article class="tekstboks <%= message.type %>">
-            <p><%= message.text %></p>
-          </article>
-          <% } %> <% if (error) { %>
-          <p role="alert"><%= error %></p>
-          <% } %>
+          <section id="messages"></section>
 
           <h2>Spørgsmål fordelt på emner</h2>
+
           <ul>
-            <li>Navn: <%= topicStats.navn %></li>
-            <li>By: <%= topicStats.by %></li>
-            <li>Hobby: <%= topicStats.hobby %></li>
+            <li>Navn: <span id="stats-navn">0</span></li>
+            <li>By: <span id="stats-by">0</span></li>
+            <li>Hobby: <span id="stats-hobby">0</span></li>
           </ul>
         </article>
       </section>

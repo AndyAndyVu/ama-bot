@@ -166,7 +166,7 @@ app.delete("/answers/:category", async (request, response) => {
 
   response.send();
 });
-
+// save ama bot...
 
 
 app.listen(port, () => {
