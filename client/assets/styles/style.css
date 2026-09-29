@@ -31,5 +31,9 @@ button {
 }
 
 .answer {
-    background: red;
+    background: orange;
+}
+
+#clear-messages-button {
+    background-color: red;
 }
