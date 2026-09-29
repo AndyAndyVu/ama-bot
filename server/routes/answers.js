@@ -22,7 +22,14 @@ router.get("/:category", async (request, response) => {
     (answer) => answer.category === request.params.category
   );
 
-  response.json(answerRule);
+  if (!answerRule) {
+    response.status(404).json({
+      error: "kategorien blev ikke fundet"
+    });
+    return;
+  }
+
+  response.status(200).json(answerRule);
 });
 
 
@@ -35,11 +42,22 @@ router.post("/", async (request, response) => {
     answer: request.body.answer
   };
 
+    if (
+    !request.body.category ||
+    !request.body.keywords ||
+    !request.body.answer
+  ) {
+    response.status(400).json({
+      error: "Category, keywords og answer skal udfyldes."
+    });
+    return;
+  }
+
   answers.push(newAnswerRule);
 
   await saveAnswers(answers);
 
-  response.json(newAnswerRule);
+  response.status(201).json(newAnswerRule);
 });
 
 
@@ -50,26 +68,26 @@ router.put("/:category", async (request, response) => {
     (answer) => answer.category === request.params.category
   );
 
+  if (!answerRule) {
+    response.status(404).json({
+      error: "Kategorien blev ikke fundet."
+    });
+    return;
+  }
+
+  if (!request.body.keywords || !request.body.answer) {
+    response.status(400).json({
+      error: "Keywords og answer skal udfyldes."
+    });
+    return;
+  }
+
   answerRule.keywords = request.body.keywords;
   answerRule.answer = request.body.answer;
 
   await saveAnswers(answers);
 
-  response.json(answerRule);
+  response.status(200).json(answerRule);
 });
-
-
-router.delete("/:category", async (request, response) => {
-  const answers = await loadAnswers();
-
-  const updatedAnswers = answers.filter(
-    (answer) => answer.category !== request.params.category
-  );
-
-  await saveAnswers(updatedAnswers);
-
-  response.send();
-});
-
 
 export default router;

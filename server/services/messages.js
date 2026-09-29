@@ -4,7 +4,9 @@ export async function loadMessages() {
   const data = await fs.readFile("./data/messages.json", "utf8");
 
   return JSON.parse(data);
-}
+  
+} 
+
 
 export async function saveMessages(messages) {
   const json = JSON.stringify(messages, null, 2);

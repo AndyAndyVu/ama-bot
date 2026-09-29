@@ -16,7 +16,7 @@ const router = express.Router();
 router.get("/", async (request, response) => {
   const messages = await loadMessages();
 
-  response.json(messages);
+  response.status(200).json(messages);
 });
 
 
@@ -27,7 +27,7 @@ router.post("/", async (request, response) => {
   const question = request.body.question.trim();
 
   if (!question) {
-    response.json({
+    response.status(400).json({
       error: "Skriv et spørgsmål, før du sender."
     });
 
@@ -54,7 +54,7 @@ router.post("/", async (request, response) => {
 
   await saveMessages(messages);
 
-  response.json({
+  response.status(201).json({
     question: message,
     answer: answerMessage
   });
@@ -64,7 +64,7 @@ router.post("/", async (request, response) => {
 router.delete("/", async (request, response) => {
   await saveMessages([]);
 
-  response.send();
+  response.status(204).send();
 });
 
 

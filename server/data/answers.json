@@ -4,9 +4,9 @@
     "keywords": [
       "navn",
       "hedder",
-      "hvem er du"
+      "hvem"
     ],
-    "answer": "Jeg hedder Ada."
+    "answer": "Jeg hedder Andy."
   },
   {
     "category": "by",
@@ -25,5 +25,14 @@
       "kan lide"
     ],
     "answer": "I min fritid kan jeg godt lide at spille eller slappe af."
+  },
+  {
+    "category": "mad",
+    "keywords": [
+      "mad",
+      "spise",
+      "livret"
+    ],
+    "answer": "Jeg kan godt lide sushi."
   }
 ]
