@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/AndyAndyVu/ama-bot#readme",
   "dependencies": {
+    "cors": "^2.8.6",
     "ejs": "^6.0.1",
     "express": "^5.2.1"
   }

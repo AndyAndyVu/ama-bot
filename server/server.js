@@ -1,5 +1,6 @@
 import express from "express";
 import fs from "node:fs/promises";
+import cors from "cors";
 
 const app = express();
 const port = 3000;
@@ -10,6 +11,7 @@ const topicStats = {
 };
 
 app.use(express.json());
+app.use(cors());
 
 
 async function loadMessages() {
@@ -42,17 +44,19 @@ function countMatches(keywords, normalizedQuestion) {
   return matches.length;
 }
 
-function findBestAnswer(question) {
+function findBestAnswer(question, answers) {
   const normalizedQuestion = question.toLowerCase();
   let bestScore = 0;
   let bestAnswer = "Det kender jeg ikke svaret på endnu.";
   let bestCategory = "";
 
   for (const answerGroup of answers) {
-    const score = countMatches(answerGroup.keywords, normalizedQuestion);
+    const score = countMatches(
+      answerGroup.keywords,
+      normalizedQuestion
+    );
 
-  console.log(answerGroup.keywords, score); 
-
+    console.log(answerGroup.keywords, score);
 
     if (score > bestScore) {
       bestScore = score;
@@ -62,23 +66,9 @@ function findBestAnswer(question) {
   }
 
   return {
-  answer: bestAnswer,
-  category: bestCategory
-};
-}
-
-function findAnswer(question) {
-  const normalizedQuestion = question.toLowerCase();
-
-  for (const answerGroup of answers) {
-    const hasMatch = answerGroup.keywords.some((keyword) => normalizedQuestion.includes(keyword));
-
-    if (hasMatch) {
-      return answerGroup.answer;
-    }
-  }
-
-  return "Det kender jeg ikke svaret på endnu.";
+    answer: bestAnswer,
+    category: bestCategory
+  };
 }
 
 
@@ -90,6 +80,8 @@ app.get("/messages", async (request, response) => {
 
 app.post("/messages", async (request, response) => {
   const messages = await loadMessages();
+  const answers = await loadAnswers();
+
   const question = request.body.question.trim();
 
   if (!question) {
@@ -97,16 +89,30 @@ app.post("/messages", async (request, response) => {
     return;
   }
 
-  const message = { type: "question", text: question, createdAt: new Date().toISOString() };
+  const message = {
+    type: "question",
+    text: question,
+    createdAt: new Date().toISOString()
+  };
+
   messages.push(message);
 
-  const result = findBestAnswer(question);
-  const answerMessage = { type: "answer", text: result.answer, createdAt: new Date().toISOString() };
+  const result = findBestAnswer(question, answers);
+
+  const answerMessage = {
+    type: "answer",
+    text: result.answer,
+    createdAt: new Date().toISOString()
+  };
+
   messages.push(answerMessage);
 
   await saveMessages(messages);
 
-  response.json({ question: message, answer: answerMessage });
+  response.json({
+    question: message,
+    answer: answerMessage
+  });
 });
 
 
@@ -166,8 +172,6 @@ app.delete("/answers/:category", async (request, response) => {
 
   response.send();
 });
-// save ama bot...
-
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
